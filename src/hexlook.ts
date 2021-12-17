@@ -14,7 +14,7 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
    */
   function renderOffsetColumn(): void {
     const offsetBlk = pad('0', _totalOffset.toString(16), _opts.offsetWidth);
-    _line = pad(' ', offsetBlk, _opts.offsetGutter) + _opts.offsetSep;
+    _line = offsetBlk + _opts.offsetSep;
   }
 
   /**
@@ -100,14 +100,14 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
     throw new Error('payload is unknown');
 
   // Init options.
-  if (!opts.offsetWidth)
-    opts.offsetWidth = 2 * Math.ceil(payload.length.toString(16).length / 2);
+  // if (!opts.offsetWidth)
+  //   opts.offsetWidth = 2 * Math.ceil(payload.length.toString(16).length / 2);
   let _opts: Required<Options> = Object.assign({
     blockSize: 16,
-    hexGroup: 2,
-    offsetGutter: 0,
+    hexGroup: 1,
+    offsetSep: '  ',
+    // offsetSep: ': ',
     hexSep: ' ',
-    offsetSep: ': ',
     asciiSep: '|',
     emptyHex: '  ',
     emptyAscii: '',
@@ -118,7 +118,6 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
     // decorateHex: (offset, screenOffset, byte) => str,
     // decorateAscii: (offset, screenOffset, byte) => str,
   }, opts);
-  _opts.offsetGutter = Math.max(_opts.offsetWidth, _opts.offsetGutter);
 
   let _result: string[] = [];
   let _line: string = '';
