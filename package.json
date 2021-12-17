@@ -1,0 +1,76 @@
+{
+  "name": "hexlook",
+  "version": "1.0.0",
+  "description": "Dumps data in hexadecimal format. Provides a single function to take an array of bytes and display it in hexadecimal form.",
+  "main": "dist/build.common.js",
+  "module": "dist/build.esm.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "dist/",
+    "docs/",
+    "example/",
+    "types/",
+    "package.json"
+  ],
+  "scripts": {
+    "watch": "node --max-old-space-size=8192 node_modules/rollup/dist/bin/rollup -c rollup.config.js --watch",
+    "prewatch": "rm -rf dist types",
+    "build": "node --max-old-space-size=8192 node_modules/rollup/dist/bin/rollup -c rollup.config.js",
+    "prebuild": "rm -rf dist types",
+    "test": "jest",
+    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\""
+  },
+  "_moduleAliases": {
+    "~": "dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takuya-motoshima/hexlook.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "javascript",
+    "js",
+    "shared",
+    "library",
+    "lib",
+    "module",
+    "typescript",
+    "ts",
+    "esm",
+    "es6",
+    "hex",
+    "dump",
+    "hexdump"
+  ],
+  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takuya-motoshima/hexlook/issues",
+    "email": "developer.takuyamotoshima@gmail.com"
+  },
+  "homepage": "https://github.com/takuya-motoshima/hexlook#readme",
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "jest": "^26.6.3",
+    "rollup": "^2.51.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "tsc-alias": "^1.2.9",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3"
+  }
+}
