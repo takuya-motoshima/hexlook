@@ -15,28 +15,46 @@ export default interface {
   hexGroup: number,
 
   /**
-   * Delimiter between offset and byte columns. (default '  ')
-   * @type {string}
-   */
-  offsetSep: string,
-
-  /**
    * Delimiter between byte characters. (default ' ')
    * @type {string}
    */
   hexSep: string,
 
   /**
-   * Delimiter between byte string and ASCII string. (default '  ')
-   * @type {string}
-   */
-  asciiSep: string,
-
-  /**
    * A character that is displayed when it cannot be represented as a byte character. (default '  ')
    * @type {string}
    */
   emptyHex: string,
+
+  /**
+   * Set to true to display the offset column. (default true) 
+   * @type {boolean}
+   */
+  showOffset: boolean,
+
+  /**
+   * Delimiter between offset and byte columns. (default '  ')
+   * @type {string}
+   */
+  offsetSep: string,
+
+  /**
+   * Minimum number of digits to display in the offset column. (default 8)
+   * @type {number}
+   */
+  offsetWidth: number
+
+  /**
+   * Set to true to display ASCII columns. (default true) 
+   * @type {boolean}
+   */
+  showAscii: boolean,
+
+  /**
+   * Delimiter between byte string and ASCII string. (default '  ')
+   * @type {string}
+   */
+  asciiSep: string,
 
   /**
    * Character to be displayed when it cannot be expressed as ASCII character. (default '')
@@ -50,12 +68,6 @@ export default interface {
    */
   nullAscii: string,
 
-  /**
-   * Minimum number of digits to display in the offset column. (default 8)
-   * @type {number}
-   */
-  offsetWidth: number
- 
   /**
    * a function that accepts a byte value and returns a hexen readable, two character representation of that byte. By default, the hexen representation is lower-case zero-padded hex.
    * @type {(byte: number) => string}
