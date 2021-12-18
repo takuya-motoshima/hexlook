@@ -23,11 +23,11 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
   function renderHexAndAsciiColumn(): void {
     if (!_line.length)
       return;
-    let rem = _screenOffset % _opts.blockSize;
-    if (rem !== 0 || (_totalOffset === 0 && _opts.nullAscii)) {
-      rem = _opts.blockSize - rem;
+    let rem = _screenOffset % _opts.hexBlock;
+    if (rem !== 0 || (_totalOffset === 0 && _opts.asciiNull)) {
+      rem = _opts.hexBlock - rem;
       for (let i=0; i<rem; i++)
-        setHexPart(_opts.emptyHex, _opts.emptyAscii);
+        setHexPart(_opts.hexEmpty, _opts.asciiEmpty);
     }
     _line += _hexCol + '  ' + _opts.asciiSep + _asciiCol + _opts.asciiSep;
     _result.push(_line);
@@ -46,7 +46,7 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
   function setHexPart(hex: string, ascii: string, byte?: number): void {
     // hex = _opts.decorateHex(_totalOffset, _screenOffset, hex, byte);
     // ascii = _opts.decorateAscii(_totalOffset, _screenOffset, ascii, byte);
-    const isStartOfLine = _screenOffset % _opts.blockSize === 0;
+    const isStartOfLine = _screenOffset % _opts.hexBlock === 0;
     const isStartOfGroup = _screenOffset % _opts.hexGroup === 0;
     if (!isStartOfLine && isStartOfGroup)
       _hexCol += _opts.hexSep;
@@ -103,19 +103,19 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
   // if (!opts.offsetWidth)
   //   opts.offsetWidth = 2 * Math.ceil(payload.length.toString(16).length / 2);
   let _opts: Required<Options> = Object.assign({
-    blockSize: 16,
+    hexBlock: 16,
     hexGroup: 1,
     hexSep: ' ',
-    emptyHex: '  ',
-    showOffset: true,
+    hexEmpty: '  ',
+    hexRender: byteToHex,
+    offsetShow: true,
     offsetSep: '  ',
     offsetWidth: 8,
-    showAscii: true,
+    asciiShow: true,
     asciiSep: '|',
-    emptyAscii: '',
-    nullAscii: '',
-    renderHex: byteToHex,
-    renderAscii: byteToAscii
+    asciiEmpty: '',
+    asciiNull: '',
+    asciiRender: byteToAscii
     // decorateHex: (offset, screenOffset, byte) => str,
     // decorateAscii: (offset, screenOffset, byte) => str,
   }, opts);
@@ -129,18 +129,18 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
 
   // Dumps data in hexadecimal format.
   for (let offset=0; offset<payload.length; offset++) {
-    if (_screenOffset % _opts.blockSize === 0) {
+    if (_screenOffset % _opts.hexBlock === 0) {
       renderHexAndAsciiColumn();
       renderOffsetColumn();
     }
     const byte = payload[offset];
-    const hex = _opts.renderHex(byte);
-    const ascii = _opts.renderAscii(byte);
+    const hex = _opts.hexRender(byte);
+    const ascii = _opts.asciiRender(byte);
     setHexPart(hex, ascii, payload[offset]);
   }
-  if (_totalOffset === 0 && _opts.nullAscii) {
+  if (_totalOffset === 0 && _opts.asciiNull) {
     renderOffsetColumn();
-    _asciiCol += _opts.nullAscii;
+    _asciiCol += _opts.asciiNull;
   }
   renderHexAndAsciiColumn();
   return _result.join('\n');
