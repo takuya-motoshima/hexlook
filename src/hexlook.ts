@@ -21,7 +21,8 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
    * Render Hex and ASCII column.
    */
   function renderHexAndAsciiColumn(): void {
-    if (!_line.length)
+    if (_opts.offsetShow && !_line.length)
+    // if (!_line.length)
       return;
     let rem = _screenOffset % _opts.hexBlock;
     if (rem !== 0 || (_totalOffset === 0 && _opts.asciiNull)) {
@@ -29,7 +30,9 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
       for (let i=0; i<rem; i++)
         setHexPart(_opts.hexEmpty, _opts.asciiEmpty);
     }
-    _line += _hexCol + '  ' + _opts.asciiSep + _asciiCol + _opts.asciiSep;
+    _line += _hexCol;
+    if (_opts.asciiShow)
+      _line += '  ' + _opts.asciiSep + _asciiCol + _opts.asciiSep;
     _result.push(_line);
     _line = '';
     _hexCol = '';
@@ -131,7 +134,8 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
   for (let offset=0; offset<payload.length; offset++) {
     if (_screenOffset % _opts.hexBlock === 0) {
       renderHexAndAsciiColumn();
-      renderOffsetColumn();
+      if (_opts.offsetShow)
+        renderOffsetColumn();
     }
     const byte = payload[offset];
     const hex = _opts.hexRender(byte);
@@ -139,7 +143,8 @@ export default function(payload: Buffer|string, opts: Partial<Options> = {}): st
     setHexPart(hex, ascii, payload[offset]);
   }
   if (_totalOffset === 0 && _opts.asciiNull) {
-    renderOffsetColumn();
+    if (_opts.offsetShow)
+      renderOffsetColumn();
     _asciiCol += _opts.asciiNull;
   }
   renderHexAndAsciiColumn();

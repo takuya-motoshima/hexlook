@@ -10,6 +10,6 @@
   "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
   "license": "MIT",
   "dependencies": {
-    "hexlook": "~1"
+    "hexer": "^1.5.0"
   }
 }
