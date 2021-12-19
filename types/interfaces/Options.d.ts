@@ -23,7 +23,7 @@ export default interface  {
      */
     hexEmpty: string;
     /**
-     * a function that accepts a byte value and returns a hexen readable, two character representation of that byte. By default, the hexen representation is lower-case zero-padded hex.
+     * A function that accepts a byte value and returns a hexen readable, two character representation of that byte. By default, the hexen representation is lower-case zero-padded hex.
      * @type {(byte: number) => string}
      */
     hexRender: (byte: number) => string;
@@ -63,7 +63,7 @@ export default interface  {
      */
     asciiNull: string;
     /**
-     * a function that accepts a byte value and returns a human readable, single character representation of that byte. By default, the human representation is the character itself for all printable ASCII characters, and a period "." for control characters and EASCII bytes.
+     * A function that accepts a byte value and returns a human readable, single character representation of that byte. By default, the human representation is the character itself for all printable ASCII characters, and a period "." for control characters and EASCII bytes.
      * @type {(byte: number) => string}
      */
     asciiRender: (byte: number) => string;

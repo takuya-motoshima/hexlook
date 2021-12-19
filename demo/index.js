@@ -1,5 +1,4 @@
 const hexlook = require('../dist/build.common');
-// const hexlook = require('hexlook');
 
 let payload, dump;
 
@@ -23,13 +22,13 @@ dump = hexlook(payload, {
 });
 console.log(dump);
 
-// 0byte
+// 0 byte
 // Output: ''
 payload = [];
 dump = hexlook(Buffer.from(payload));
 console.log(dump);
 
-// 8byte
+// 8 bytes
 // Output: 00000000  01 02 03 04 05 06 07 08                          |........|
 payload = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08];
 dump = hexlook(Buffer.from(payload));
@@ -76,7 +75,7 @@ payload = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x77, 0x68, 0x61, 0x6c, 0x65, 0x0
 dump = hexlook(Buffer.from(payload), {offsetWidth: 2});
 console.log(dump);
 
-// invalid
+// Passing undefined parameter will result in an error
 // Output: payload is unknown
 try {
   const payload = undefined;
@@ -84,6 +83,8 @@ try {
 } catch(err) {
   console.error(err.message);
 }
+
+// Passing null parameter will result in an error
 // Output: payload is unknown
 try {
   const payload = null;
@@ -91,6 +92,8 @@ try {
 } catch(err) {
   console.error(err.message);
 }
+
+// Passing numeric parameter will result in an error
 // Output: payload is unknown
 try {
   const payload = 123;
@@ -98,6 +101,8 @@ try {
 } catch(err) {
   console.error(err.message);
 }
+
+// Passing array parameter will result in an error
 // Output: payload is unknown
 try {
   const payload = [];
@@ -105,6 +110,8 @@ try {
 } catch(err) {
   console.error(err.message);
 }
+
+// Passing object parameter will result in an error
 // Output: payload is unknown
 try {
   const payload = {};
