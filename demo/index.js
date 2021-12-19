@@ -76,21 +76,39 @@ payload = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x77, 0x68, 0x61, 0x6c, 0x65, 0x0
 dump = hexlook(Buffer.from(payload), {offsetWidth: 2});
 console.log(dump);
 
-// test('hex(invalid)', function t(assert) {
-//     assert.throws(function() {
-//         hex(undefined);
-//     }, 'no hex(undefined)');
-//     assert.throws(function() {
-//         hex(null);
-//     }, 'no hex(null)');
-//     assert.throws(function() {
-//         hex(123);
-//     }, 'no hex(number)');
-//     assert.throws(function() {
-//         hex([]);
-//     }, 'no hex(Array)');
-//     assert.throws(function() {
-//         hex({});
-//     }, 'no hex(Object)');
-//     assert.end();
-// });
+// invalid
+// Output: payload is unknown
+try {
+  const payload = undefined;
+  hexlook(payload);
+} catch(err) {
+  console.error(err.message);
+}
+// Output: payload is unknown
+try {
+  const payload = null;
+  hexlook(payload);
+} catch(err) {
+  console.error(err.message);
+}
+// Output: payload is unknown
+try {
+  const payload = 123;
+  hexlook(payload);
+} catch(err) {
+  console.error(err.message);
+}
+// Output: payload is unknown
+try {
+  const payload = [];
+  hexlook(payload);
+} catch(err) {
+  console.error(err.message);
+}
+// Output: payload is unknown
+try {
+  const payload = {};
+  hexlook(payload);
+} catch(err) {
+  console.error(err.message);
+}
