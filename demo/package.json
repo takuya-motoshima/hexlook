@@ -1,0 +1,16 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "start:esm": "node -r esm esm.js"
+  },
+  "keywords": [],
+  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
+  "license": "MIT",
+  "devDependencies": {
+    "esm": "^3.2.25"
+  }
+}
